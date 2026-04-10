@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">☀️</button>
+
+    <!-- Hero Landing Section -->
+    <section class="hero-section">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="pill-badge">Analytics Core</div>
+                <h1 class="hero-title">Expense <span class="highlight">Tracker Pro</span></h1>
+                <p class="hero-subtitle">Take control of your finances. Record, categorize, and visualize your daily expenses with our intuitive analytics dashboard.</p>
+                <button class="hero-btn" onclick="document.getElementById('dashboard').scrollIntoView({behavior: 'smooth'})">Launch Tracker &darr;</button>
+            </div>
+            <div class="hero-graphics">
+                <div class="floating-card glass-panel">
+                    <div class="card-header">Monthly Summary</div>
+                    <canvas id="heroChart" width="250" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard-wrapper" id="dashboard">
+        <div class="dashboard-main glass-panel">
+            <header>
+                <h2>Financial Overview</h2>
+                <div class="balance-display">
+                    <span>Total Expenses:</span>
+                    <h2 id="totalExpenses">$0.00</h2>
+                </div>
+            </header>
+
+            <main class="dashboard-grid">
+                <!-- Add Expense Form -->
+                <section class="input-section glass-panel">
+                    <h3>Add New Transaction</h3>
+                    <form id="expenseForm" onsubmit="addExpense(event)">
+                        <div class="input-wrapper">
+                            <input type="text" id="expName" required placeholder=" " />
+                            <label>Expense Name</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="number" id="expAmount" required placeholder=" " step="0.01" min="0" />
+                            <label>Amount ($)</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <select id="expCategory" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="Food">Food & Dining</option>
+                                <option value="Transport">Transportation</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label>Category</label>
+                        </div>
+                        <button type="submit" class="primary-btn submit-full">Add Expense</button>
+                        <button type="button" class="action-btn submit-full" style="margin-top: 10px;" onclick="clearAll()">Clear All Data</button>
+                    </form>
+                </section>
+
+                <!-- Analytics Chart -->
+                <section class="chart-section glass-panel">
+                    <h3>Spending Analytics</h3>
+                    <div class="chart-container">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Transaction List -->
+                <section class="list-section glass-panel">
+                    <h3>Recent Transactions</h3>
+                    <div class="table-container">
+                        <table id="expenseTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>$ Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
